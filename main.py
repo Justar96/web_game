@@ -15,30 +15,28 @@ scale = 100
 circle_pos = [WIDTH/2, HEIGHT/2]
 angle = 0
 
-points = []
-for x in (-1, 1):
-    for y in (-1, 1):
-        for z in (-1, 1):
-            points.append(np.matrix([x, y, z]))
-
-print(points)
-
-projection_matrix = np.matrix([
-    [1, 0, 0],
-    [0, 1, 0]
-])
-
-projected_points = [
-    [n, n] for n in range(len(points))
-]
-
-def connect_points(i,j,points):
-    pygame.draw.line(screen, BLACK, (points[i][0], points[i][1]), (points[j][0], points[j][1]))
-
-clock = pygame.time.Clock()
-
 async def main():
     global angle
+    points = []
+    for x in (-1, 1):
+        for y in (-1, 1):
+            for z in (-1, 1):
+                points.append(np.matrix([x, y, z]))
+
+    projection_matrix = np.matrix([
+        [1, 0, 0],
+        [0, 1, 0]
+    ])
+
+    projected_points = [
+        [n, n] for n in range(len(points))
+    ]
+
+    def connect_points(i,j,points):
+        pygame.draw.line(screen, BLACK, (points[i][0], points[i][1]), (points[j][0], points[j][1]))
+
+    clock = pygame.time.Clock()
+
     while True:
         i = 0
         angle += 0.01
